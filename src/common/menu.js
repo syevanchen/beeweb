@@ -17,5 +17,35 @@ function formatter(data, parentPath = '/', parentAuthority) {
     return result;
   });
 }
+function beehivaMenuAdapte(data) {
+  const menuData = data.data;
+  return beehivaMenuAdapteConvert(menuData);
+}
 
-export const getMenuData = (menuData) => formatter(menuData);
+function beehivaMenuAdapteConvert(data) {
+  return data.map(item => {
+    let itemTitle = item.name;
+    if (item.title) itemTitle = item.title;
+
+    const result = {
+      name: itemTitle,
+      icon: item.icon,
+      path: item.href,
+      disabled: item.disable,
+      key: item.id,
+      // hideInBreadcrumb: true,
+      // hideInMenu: true,
+      // authority: 'admin',
+    };
+    if (item.items) {
+      result.children = beehivaMenuAdapteConvert(item.items);
+    }
+
+    if (item.subMenu) {
+      result.subMenu = item.subMenu;
+    }
+    return result;
+  });
+}
+
+export const getMenuData = menuData => formatter(beehivaMenuAdapte(menuData));

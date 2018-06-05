@@ -1,5 +1,5 @@
 import { query as queryUsers, queryCurrent, queryMenus } from '../services/user';
-import {getMenuData} from "../common/menu";
+import { getMenuData } from '../common/menu';
 
 export default {
   namespace: 'user',
@@ -27,7 +27,7 @@ export default {
     },
     *fetchMenus(_, { call, put }) {
       const response = yield call(queryMenus);
-      const menus = getMenuData(response)
+      const menus = getMenuData(response);
       yield put({
         type: 'saveMenus',
         payload: menus,

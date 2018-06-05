@@ -107,7 +107,7 @@ export const getRouterData = app => {
     '/form/advanced-form': {
       component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/AdvancedForm')),
     },
-    '/list/table-list': {
+    '/service/ngcpconfig': {
       component: dynamicWrapper(app, ['rule'], () => import('../routes/List/TableList')),
     },
     '/list/basic-list': {
