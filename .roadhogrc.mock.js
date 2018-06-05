@@ -135,161 +135,119 @@ const proxy = {
       path: '/base/category/list',
     });
   },
-  'GET /api/menus':[
-    {
-      name: 'dashboard',
-      icon: 'dashboard',
-      path: 'dashboard',
-      children: [
-        {
-          name: '分析页',
-          path: 'analysis',
-        },
-        {
-          name: '监控页',
-          path: 'monitor',
-        },
-        {
-          name: '工作台',
-          path: 'workplace',
-          // hideInBreadcrumb: true,
-          // hideInMenu: true,
-        },
-      ],
-    },
-    {
-      name: '表单页',
-      icon: 'form',
-      path: 'form',
-      children: [
-        {
-          name: '基础表单',
-          path: 'basic-form',
-        },
-        {
-          name: '分步表单',
-          path: 'step-form',
-        },
-        {
-          name: '高级表单',
-          authority: 'admin',
-          path: 'advanced-form',
-        },
-      ],
-    },
-    {
-      name: '列表页',
-      icon: 'table',
-      path: 'list',
-      children: [
-        {
-          name: '查询表格',
-          path: 'table-list',
-        },
-        {
-          name: '标准列表',
-          path: 'basic-list',
-        },
-        {
-          name: '卡片列表',
-          path: 'card-list',
-        },
-        {
-          name: '搜索列表',
-          path: 'search',
-          children: [
-            {
-              name: '搜索列表（文章）',
-              path: 'articles',
+  'GET /api/menus': {
+    data: [
+      {
+        id: '1',
+        title: '基础技术服务',
+        icon: 'android',
+        href: 'dashboard',
+        items: [
+          {
+            id: '11',
+            icon: 'android',
+            name: '容器管理',
+            href: 'workplace',
+          },
+          {
+            id: '12',
+            icon: 'android',
+            name: '队列消息',
+            href: 'que-msg',
+            disable: true,
+          },
+        ],
+      },
+      {
+        id: '3',
+        title: '各种服务',
+        icon: 'android',
+        href: 'service',
+        items: [
+          {
+            id: '31',
+            icon: 'android',
+            name: '配置管理',
+            href: 'ngcpconfig',
+          },
+          {
+            id: '32',
+            icon: 'android',
+            name: '缓存服务',
+            href: 'ngcpredis',
+          },
+          {
+            id: '33',
+            icon: 'android',
+            name: '容器管理',
+            href: 'ngcpdocker',
+          },
+          {
+            id: '34',
+            icon: 'android',
+            name: '管理控制台',
+            href: 'ngcpconsole',
+          },
+          {
+            id: '35',
+            icon: 'android',
+            name: '个人信息中心',
+            href: 'ngcpperson',
+          },
+          {
+            id: '36',
+            icon: 'android',
+            name: '企业信息中心',
+            href: 'ngcpcompany',
+          },
+          {
+            id: '37',
+            icon: 'android',
+            name: '医保网关核心服务',
+            href: 'mgwcore',
+          },
+          {
+            id: '38',
+            icon: 'android',
+            name: '医保网关开放服务',
+            href: 'mgwopen',
+          },
+        ],
+      },
+      {
+        id: '2',
+        title: '系统服务',
+        icon: 'android',
+        href: 'list',
+        items: [
+          {
+            id: '21',
+            icon: 'android',
+            name: '服务商店',
+            href: 'card-list',
+            subMenu: {
+              summary: true,
+              apidoc: true,
+              status: true,
+              control: true,
+              logs: true,
+              resource: true,
+              entry: true,
+              register: true,
             },
-            {
-              name: '搜索列表（项目）',
-              path: 'projects',
-            },
-            {
-              name: '搜索列表（应用）',
-              path: 'applications',
-            },
-          ],
-        },
-      ],
-    },
-    {
-      name: '详情页',
-      icon: 'profile',
-      path: 'profile',
-      children: [
-        {
-          name: '基础详情页',
-          path: 'basic',
-        },
-        {
-          name: '高级详情页',
-          path: 'advanced',
-          authority: 'admin',
-        },
-      ],
-    },
-    {
-      name: '结果页',
-      icon: 'check-circle-o',
-      path: 'result',
-      children: [
-        {
-          name: '成功',
-          path: 'success',
-        },
-        {
-          name: '失败',
-          path: 'fail',
-        },
-      ],
-    },
-    {
-      name: '异常页',
-      icon: 'warning',
-      path: 'exception',
-      children: [
-        {
-          name: '403',
-          path: '403',
-        },
-        {
-          name: '404',
-          path: '404',
-        },
-        {
-          name: '500',
-          path: '500',
-        },
-        {
-          name: '触发异常',
-          path: 'trigger',
-          hideInMenu: true,
-        },
-      ],
-    },
-    {
-      name: '账户',
-      icon: 'user',
-      path: 'user',
-      authority: 'guest',
-      children: [
-        {
-          name: '登录',
-          path: 'login',
-        },
-        {
-          name: '注册',
-          path: 'register',
-        },
-        {
-          name: '注册结果',
-          path: 'register-result',
-        },
-      ],
-    },
-  ]
+            disable: false,
+          },
+          {
+            id: '22',
+            icon: 'android',
+            name: '用户信息中心',
+            href: 'user',
+            disable: true,
+          },
+        ],
+      },
+    ],
+  },
 };
 
 export default (noProxy ? {} : delay(proxy, 1000));

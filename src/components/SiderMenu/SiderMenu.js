@@ -159,7 +159,9 @@ export default class SiderMenu extends PureComponent {
   // Get the currently selected menu
   getSelectedMenuKeys = () => {
     const { location: { pathname } } = this.props;
-    return urlToList(pathname).map(itemPath => getMeunMatcheys(this.getFlatMenuKeys(this.props.menuData), itemPath).pop());
+    return urlToList(pathname).map(itemPath =>
+      getMeunMatcheys(this.getFlatMenuKeys(this.props.menuData), itemPath).pop()
+    );
   };
   // conversion Path
   // 转化路径
@@ -215,7 +217,7 @@ export default class SiderMenu extends PureComponent {
         <div className={styles.logo} key="logo">
           <Link to="/">
             <img src={logo} alt="logo" />
-            <h1>Ant Design Pro</h1>
+            <h1>beehive控制台</h1>
           </Link>
         </div>
         <Spin spinning={menuData.length === 0}>

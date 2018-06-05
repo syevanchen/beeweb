@@ -126,11 +126,19 @@ class BasicLayout extends React.PureComponent {
     }
     return redirect;
   };
-  handleMenuCollapse = collapsed => {
-    this.props.dispatch({
-      type: 'global/changeLayoutCollapsed',
-      payload: collapsed,
-    });
+  getRedirect = item => {
+    const me = this;
+    if (item && item.children) {
+      if (item.children[0] && item.children[0].path) {
+        redirectData.push({
+          from: `${item.path}`,
+          to: `${item.children[0].path}`,
+        });
+        item.children.forEach(children => {
+          me.getRedirect(children);
+        });
+      }
+    }
   };
   handleNoticeClear = type => {
     message.success(`清空了${type}`);
@@ -157,19 +165,12 @@ class BasicLayout extends React.PureComponent {
       });
     }
   };
-  getRedirect = item => {
-    const me = this
-    if (item && item.children) {
-      if (item.children[0] && item.children[0].path) {
-        redirectData.push({
-          from: `${item.path}`,
-          to: `${item.children[0].path}`,
-        });
-        item.children.forEach(children => {
-          me.getRedirect(children);
-        });
-      }
-    }
+
+  handleMenuCollapse = collapsed => {
+    this.props.dispatch({
+      type: 'global/changeLayoutCollapsed',
+      payload: collapsed,
+    });
   };
   render() {
     const {
@@ -236,27 +237,15 @@ class BasicLayout extends React.PureComponent {
             <GlobalFooter
               links={[
                 {
-                  key: 'Pro 首页',
-                  title: 'Pro 首页',
-                  href: 'http://pro.ant.design',
-                  blankTarget: true,
-                },
-                {
-                  key: 'github',
-                  title: <Icon type="github" />,
-                  href: 'https://github.com/ant-design/ant-design-pro',
-                  blankTarget: true,
-                },
-                {
-                  key: 'Ant Design',
-                  title: 'Ant Design',
-                  href: 'http://ant.design',
+                  key: 'beehive控制台',
+                  title: 'beehive控制台',
+                  href: 'http://www.neusoft.com',
                   blankTarget: true,
                 },
               ]}
               copyright={
                 <Fragment>
-                  Copyright <Icon type="copyright" /> 2018 蚂蚁金服体验技术部出品
+                  Copyright <Icon type="copyright" /> 2018 东软集团股份有限公司
                 </Fragment>
               }
             />

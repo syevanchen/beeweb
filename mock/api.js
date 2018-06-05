@@ -1,14 +1,14 @@
 import { parse } from 'url';
 
 const titles = [
-  'Alipay',
-  'Angular',
-  'Ant Design',
-  'Ant Design Pro',
-  'Bootstrap',
-  'React',
-  'Vue',
-  'Webpack',
+  '支付服务',
+  '统一认证服务',
+  '日志服务',
+  '实名认证',
+  '缓存服务',
+  '配置服务',
+  '商保试算',
+  '开放门户',
 ];
 const avatars = [
   'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png', // Alipay
@@ -68,7 +68,7 @@ export function fakeList(count) {
       id: `fake-list-${i}`,
       owner: user[i % 10],
       title: titles[i % 8],
-      avatar: avatars[i % 8],
+      avatar: avatars[7],
       cover: parseInt(i / 4, 10) % 2 === 0 ? covers[i % 4] : covers[3 - i % 4],
       status: ['active', 'exception', 'normal'][i % 3],
       percent: Math.ceil(Math.random() * 50) + 50,
@@ -77,8 +77,7 @@ export function fakeList(count) {
       updatedAt: new Date(new Date().getTime() - 1000 * 60 * 60 * 2 * i),
       createdAt: new Date(new Date().getTime() - 1000 * 60 * 60 * 2 * i),
       subDescription: desc[i % 5],
-      description:
-        '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。',
+      description: '说明服务的基本等。',
       activeUser: Math.ceil(Math.random() * 100000) + 100000,
       newUser: Math.ceil(Math.random() * 1000) + 1000,
       star: Math.ceil(Math.random() * 100) + 100,
