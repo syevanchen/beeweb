@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Layout, Icon, message } from 'antd';
+import { Layout, Icon, Menu, message } from 'antd';
 import DocumentTitle from 'react-document-title';
 import { connect } from 'dva';
 import { Route, Redirect, Switch, routerRedux } from 'dva/router';
@@ -16,7 +16,9 @@ import Authorized from '../utils/Authorized';
 // import { getMenuData } from '../common/menu';
 import logo from '../assets/logo.svg';
 
-const { Content, Header, Footer } = Layout;
+const { SubMenu } = Menu;
+
+const { Content, Header, Footer, Sider } = Layout;
 const { AuthorizedRoute, check } = Authorized;
 
 /**
@@ -100,12 +102,39 @@ class BasicLayout extends React.PureComponent {
   getPageTitle() {
     const { routerData, location } = this.props;
     const { pathname } = location;
-    let title = 'Ant Design Pro';
+    let title = 'beehive控制台';
     if (routerData[pathname] && routerData[pathname].name) {
       title = `${routerData[pathname].name} - Ant Design Pro`;
     }
     return title;
   }
+
+  getMenu() {
+    const { currentUser } = this.props;
+    //if (currentUser.subMenu) {
+    return (
+      <Sider width={200} style={{ background: '#fff' }} visible={false}>
+        <Menu
+          mode="inline"
+          defaultSelectedKeys={['1']}
+          defaultOpenKeys={['sub1']}
+          style={{ height: '100%', borderRight: 0 }}
+        >
+          <Menu.Item key="1">
+            <Icon type="mail" />概览
+          </Menu.Item>
+          <Menu.Item key="2">
+            <a href="#/dashboard/workplace">API说明</a>
+          </Menu.Item>
+          <Menu.Item key="3">服务状态</Menu.Item>
+          <Menu.Item key="4">服务管理</Menu.Item>
+          <Menu.Item key="4">服务日志</Menu.Item>
+        </Menu>
+      </Sider>
+    );
+    // }
+  }
+
   getBashRedirect = () => {
     // According to the url parameter to redirect
     // 这里是重定向的,重定向到 url 的 redirect 参数所示地址
@@ -172,6 +201,7 @@ class BasicLayout extends React.PureComponent {
       payload: collapsed,
     });
   };
+
   render() {
     const {
       menuData,
@@ -214,24 +244,29 @@ class BasicLayout extends React.PureComponent {
               onNoticeVisibleChange={this.handleNoticeVisibleChange}
             />
           </Header>
-          <Content style={{ margin: '24px 24px 0', height: '100%' }}>
-            <Switch>
-              {redirectData.map(item => (
-                <Redirect key={item.from} exact from={item.from} to={item.to} />
-              ))}
-              {getRoutes(match.path, routerData).map(item => (
-                <AuthorizedRoute
-                  key={item.key}
-                  path={item.path}
-                  component={item.component}
-                  exact={item.exact}
-                  authority={item.authority}
-                  redirectPath="/exception/403"
-                />
-              ))}
-              <Redirect exact from="/" to={bashRedirect} />
-              <Route render={NotFound} />
-            </Switch>
+          <Content style={{ height: '100%' }}>
+            <Layout>
+              {this.getMenu()}
+              <Content style={{ margin: '24px 24px 0', height: '100%' }}>
+                <Switch>
+                  {redirectData.map(item => (
+                    <Redirect key={item.from} exact from={item.from} to={item.to} />
+                  ))}
+                  {getRoutes(match.path, routerData).map(item => (
+                    <AuthorizedRoute
+                      key={item.key}
+                      path={item.path}
+                      component={item.component}
+                      exact={item.exact}
+                      authority={item.authority}
+                      redirectPath="/exception/403"
+                    />
+                  ))}
+                  <Redirect exact from="/" to={bashRedirect} />
+                  <Route render={NotFound} />
+                </Switch>
+              </Content>
+            </Layout>
           </Content>
           <Footer style={{ padding: 0 }}>
             <GlobalFooter
