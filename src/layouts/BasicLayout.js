@@ -78,7 +78,7 @@ class BasicLayout extends React.PureComponent {
   };
   state = {
     isMobile,
-    collapsed: false,
+    subcollapsed: false,
   };
   getChildContext() {
     const { location, routerData, menuData } = this.props;
@@ -114,26 +114,32 @@ class BasicLayout extends React.PureComponent {
     const { currentUser } = this.props;
     //if (currentUser.subMenu) {
     return (
-      <Sider width={200} style={{ background: '#fff' }} visible={false}>
+      <Sider
+        width={200}
+        style={{ background: '#fff' }}
+        visible={false}
+        collapsible
+        collapsed={this.state.subcollapsed}
+        trigger={null}
+      >
         <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
-          <Icon type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'} />
+          <Icon type={this.state.subcollapsed ? 'menu-unfold' : 'menu-fold'} />
         </Button>
         <Menu
           mode="inline"
           defaultSelectedKeys={['1']}
           defaultOpenKeys={['sub1']}
-          style={{ height: '100%', borderRight: 0 }}
-          inlineCollapsed={this.state.collapsed}
+          // style={{ height: '100%', borderRight: 0 }}
         >
           <Menu.Item key="1">
-            <Icon type="mail" />概览
+            <Icon type="mail" /><span>概览</span>
           </Menu.Item>
           <Menu.Item key="2">
-            <a href="#/dashboard/workplace">API说明</a>
+            <a href="#/dashboard/workplace"><Icon type="mail" /><span>API说明</span></a>
           </Menu.Item>
-          <Menu.Item key="3">服务状态</Menu.Item>
-          <Menu.Item key="4">服务管理</Menu.Item>
-          <Menu.Item key="4">服务日志</Menu.Item>
+          <Menu.Item key="3"><Icon type="pie-chart" /><span>服务状态</span></Menu.Item>
+          <Menu.Item key="4"><Icon type="pie-chart" /><span>服务管理</span></Menu.Item>
+          <Menu.Item key="4"><Icon type="pie-chart" /><span>服务日志</span></Menu.Item>
         </Menu>
       </Sider>
     );
@@ -142,9 +148,9 @@ class BasicLayout extends React.PureComponent {
 
   toggleCollapsed = () => {
     this.setState({
-      collapsed: !this.state.collapsed,
+      subcollapsed: !this.state.subcollapsed,
     });
-  }
+  };
 
   getBashRedirect = () => {
     // According to the url parameter to redirect
@@ -257,28 +263,7 @@ class BasicLayout extends React.PureComponent {
           </Header>
           <Content style={{ height: '100%' }}>
             <Layout>
-              <Sider width={200} style={{ background: '#fff' }} visible={false}>
-                <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
-                  <Icon type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'} />
-                </Button>
-                <Menu
-                  mode="inline"
-                  defaultSelectedKeys={['1']}
-                  defaultOpenKeys={['sub1']}
-                  style={{ height: '100%', borderRight: 0 }}
-                  inlineCollapsed={this.state.collapsed}
-                >
-                  <Menu.Item key="1">
-                    <Icon type="mail" />概览
-                  </Menu.Item>
-                  <Menu.Item key="2">
-                    <a href="#/dashboard/workplace">API说明</a>
-                  </Menu.Item>
-                  <Menu.Item key="3">服务状态</Menu.Item>
-                  <Menu.Item key="4">服务管理</Menu.Item>
-                  <Menu.Item key="4">服务日志</Menu.Item>
-                </Menu>
-              </Sider>
+              {this.getMenu()}
               <Content style={{ margin: '24px 24px 0', height: '100%' }}>
                 <Switch>
                   {redirectData.map(item => (
