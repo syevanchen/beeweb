@@ -122,9 +122,13 @@ class BasicLayout extends React.PureComponent {
         collapsed={this.state.subcollapsed}
         trigger={null}
       >
+        <div style={{width:"200px", position: 'relative'}}>
+          <div style={{width:'30px', float: 'right'}}>
         <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 0 }}>
           <Icon type={this.state.subcollapsed ? 'menu-unfold' : 'menu-fold'} />
         </Button>
+          </div>
+        </div>
         <Menu
           mode="inline"
           defaultSelectedKeys={['1']}
