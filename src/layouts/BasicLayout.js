@@ -122,7 +122,7 @@ class BasicLayout extends React.PureComponent {
         collapsed={this.state.subcollapsed}
         trigger={null}
       >
-        <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
+        <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 0 }}>
           <Icon type={this.state.subcollapsed ? 'menu-unfold' : 'menu-fold'} />
         </Button>
         <Menu
@@ -132,25 +132,32 @@ class BasicLayout extends React.PureComponent {
           // style={{ height: '100%', borderRight: 0 }}
         >
           <Menu.Item key="1">
-            <Icon type="mail" /><span>概览</span>
+            <Icon type="mail" />
+            <span>概览</span>
           </Menu.Item>
           <Menu.Item key="2">
-            <a href="#/dashboard/workplace"><Icon type="mail" /><span>API说明</span></a>
+            <a href="#/dashboard/workplace">
+              <Icon type="mail" />
+              <span>API说明</span>
+            </a>
           </Menu.Item>
-          <Menu.Item key="3"><Icon type="pie-chart" /><span>服务状态</span></Menu.Item>
-          <Menu.Item key="4"><Icon type="pie-chart" /><span>服务管理</span></Menu.Item>
-          <Menu.Item key="4"><Icon type="pie-chart" /><span>服务日志</span></Menu.Item>
+          <Menu.Item key="3">
+            <Icon type="pie-chart" />
+            <span>服务状态</span>
+          </Menu.Item>
+          <Menu.Item key="4">
+            <Icon type="pie-chart" />
+            <span>服务管理</span>
+          </Menu.Item>
+          <Menu.Item key="4">
+            <Icon type="pie-chart" />
+            <span>服务日志</span>
+          </Menu.Item>
         </Menu>
       </Sider>
     );
     // }
   }
-
-  toggleCollapsed = () => {
-    this.setState({
-      subcollapsed: !this.state.subcollapsed,
-    });
-  };
 
   getBashRedirect = () => {
     // According to the url parameter to redirect
@@ -186,6 +193,13 @@ class BasicLayout extends React.PureComponent {
       }
     }
   };
+
+  toggleCollapsed = () => {
+    this.setState({
+      subcollapsed: !this.state.subcollapsed,
+    });
+  };
+
   handleNoticeClear = type => {
     message.success(`清空了${type}`);
     this.props.dispatch({

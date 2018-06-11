@@ -406,7 +406,7 @@ export default class SimpleTableList extends PureComponent {
       handleModalVisible: this.handleModalVisible,
     };
 
-    let { list, pagination } = data
+    let { list, pagination } = data;
     return (
       <PageHeaderLayout title="查询表格">
         <Card bordered={false}>
