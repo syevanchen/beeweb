@@ -51,7 +51,24 @@ const proxy = {
   ],
   'GET /api/project/notice': getNotice,
   'GET /api/activities': getActivities,
-  'GET /api/v1/service/summary/ngcpconfig': getRule,
+  'GET /api/v1/service/summary/ngcpconfig': {
+    'serviceName': 'gateway',
+    'serviceStatus': 'UP',
+    'deployType': 1,
+    'serviceInstances': [
+      {
+        'serviceId': 'mgwcore-643032428',
+        'containerName':'mesos-959ca350-b07a-4e5e-8a08-3b7770ab0321-S2.a2b078e6-2801-4a30-afbf-8a3fa499c2dd',
+        'status': 'UP',
+        'dataCenter': 'new-infra',
+        'host': '192.168.112.54:31682',
+        'upTime': '0:40:50',
+        'excutableImage': '/app.jar',
+        'version': '0.1.0-SNAPSHOT',
+        'type': 'server'
+      }
+    ]
+  },
   'POST /api/rule': {
     $params: {
       pageSize: {

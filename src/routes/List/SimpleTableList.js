@@ -320,7 +320,7 @@ export default class SimpleTableList extends PureComponent {
     const columns = [
       {
         title: '实例ID',
-        dataIndex: 'no',
+        dataIndex: 'serviceId',
       },
       {
         title: '健康状况',
@@ -350,11 +350,11 @@ export default class SimpleTableList extends PureComponent {
       },
       {
         title: '所在区域',
-        dataIndex: 'description',
+        dataIndex: 'dataCenter',
       },
       {
         title: '服务地址',
-        dataIndex: 'callNo',
+        dataIndex: 'host',
         sorter: true,
         align: 'right',
         render: val => `${val} 万`,
@@ -363,21 +363,21 @@ export default class SimpleTableList extends PureComponent {
       },
       {
         title: '启动时间',
-        dataIndex: 'updatedAt',
+        dataIndex: 'upTime',
         sorter: true,
         render: val => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
       },
       {
         title: '程序包',
-        dataIndex: 'updatedAt',
+        dataIndex: 'excutableImage',
       },
       {
         title: '版本信息',
-        dataIndex: 'updatedAt',
+        dataIndex: 'version',
       },
       {
         title: '类型',
-        dataIndex: 'updatedAt',
+        dataIndex: 'type',
       },
       {
         title: '详细信息',

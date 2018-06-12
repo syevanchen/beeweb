@@ -38,9 +38,20 @@ export default {
 
   reducers: {
     save(state, action) {
+      const data = action.payload;
+
+      const result = {
+        list: data.serviceInstances,
+        pagination: {
+          total: data.serviceInstances.length,
+          pageSize : 10,
+          current: 1,
+        },
+      };
+
       return {
         ...state,
-        data: action.payload,
+        data: result,
       };
     },
   },
