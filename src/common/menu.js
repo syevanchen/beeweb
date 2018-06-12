@@ -31,6 +31,7 @@ function beehivaMenuAdapteConvert(data) {
       name: itemTitle,
       icon: item.icon,
       path: item.href,
+      serviceId : item.href,
       disabled: item.disable,
       key: item.id,
       // hideInBreadcrumb: true,
@@ -43,6 +44,7 @@ function beehivaMenuAdapteConvert(data) {
 
     if (item.subMenu) {
       result.subMenu = item.subMenu;
+      result.path =  `${result.path}/summary`;
     }
     return result;
   });

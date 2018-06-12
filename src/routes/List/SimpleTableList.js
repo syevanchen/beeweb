@@ -76,6 +76,7 @@ export default class SimpleTableList extends PureComponent {
     const { dispatch } = this.props;
     dispatch({
       type: 'rule/fetch',
+      payload: this.props.match.params.serviceId,
     });
   }
 
@@ -411,22 +412,6 @@ export default class SimpleTableList extends PureComponent {
       <PageHeaderLayout title="查询表格">
         <Card bordered={false}>
           <div className={styles.tableList}>
-            <div className={styles.tableListForm}>{this.renderForm()}</div>
-            <div className={styles.tableListOperator}>
-              <Button icon="plus" type="primary" onClick={() => this.handleModalVisible(true)}>
-                新建
-              </Button>
-              {selectedRows.length > 0 && (
-                <span>
-                  <Button>批量操作</Button>
-                  <Dropdown overlay={menu}>
-                    <Button>
-                      更多操作 <Icon type="down" />
-                    </Button>
-                  </Dropdown>
-                </span>
-              )}
-            </div>
             <Table
               // selectedRows={selectedRows}
               loading={loading}

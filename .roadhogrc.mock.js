@@ -51,7 +51,7 @@ const proxy = {
   ],
   'GET /api/project/notice': getNotice,
   'GET /api/activities': getActivities,
-  'GET /api/rule': getRule,
+  'GET /api/v1/service/summary/ngcpconfig': getRule,
   'POST /api/rule': {
     $params: {
       pageSize: {
@@ -139,20 +139,27 @@ const proxy = {
     data: [
       {
         id: '1',
-        title: '基础技术服务',
+        title: '健康管理',
         icon: 'android',
         href: 'dashboard',
         items: [
           {
             id: '11',
             icon: 'android',
-            name: '容器管理',
-            href: 'workplace',
+            name: '仪表盘',
+            href: 'overview',
           },
           {
             id: '12',
             icon: 'android',
-            name: '队列消息',
+            name: '平台健康',
+            href: 'que-msg',
+            disable: true,
+          },
+          {
+            id: '12',
+            icon: 'android',
+            name: '服务健康',
             href: 'que-msg',
             disable: true,
           },
@@ -169,6 +176,16 @@ const proxy = {
             icon: 'android',
             name: '配置管理',
             href: 'ngcpconfig',
+            subMenu: {
+              summary: true,
+              apidoc: true,
+              status: true,
+              control: true,
+              logs: true,
+              resource: true,
+              entry: true,
+              register: true,
+            },
           },
           {
             id: '32',
@@ -187,6 +204,16 @@ const proxy = {
             icon: 'android',
             name: '管理控制台',
             href: 'ngcpconsole',
+            subMenu: {
+              summary: true,
+              apidoc: false,
+              status: true,
+              control: true,
+              logs: false,
+              resource: true,
+              entry: true,
+              register: true,
+            },
           },
           {
             id: '35',
@@ -218,23 +245,13 @@ const proxy = {
         id: '2',
         title: '系统服务',
         icon: 'android',
-        href: 'list',
+        href: 'system',
         items: [
           {
             id: '21',
             icon: 'android',
             name: '服务商店',
-            href: 'card-list',
-            subMenu: {
-              summary: true,
-              apidoc: true,
-              status: true,
-              control: true,
-              logs: true,
-              resource: true,
-              entry: true,
-              register: true,
-            },
+            href: 'shop',
             disable: false,
           },
           {

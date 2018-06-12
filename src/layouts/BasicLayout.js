@@ -16,8 +16,6 @@ import Authorized from '../utils/Authorized';
 // import { getMenuData } from '../common/menu';
 import logo from '../assets/logo.svg';
 
-const { SubMenu } = Menu;
-
 const { Content, Header, Footer, Sider } = Layout;
 const { AuthorizedRoute, check } = Authorized;
 
@@ -112,55 +110,68 @@ class BasicLayout extends React.PureComponent {
 
   getMenu() {
     const { currentUser } = this.props;
-    //if (currentUser.subMenu) {
-    return (
-      <Sider
-        width={200}
-        style={{ background: '#fff' }}
-        visible={false}
-        collapsible
-        collapsed={this.state.subcollapsed}
-        trigger={null}
-      >
-        <div style={{width:"200px", position: 'relative'}}>
-          <div style={{width:'30px', float: 'right'}}>
-        <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 0 }}>
-          <Icon type={this.state.subcollapsed ? 'menu-unfold' : 'menu-fold'} />
-        </Button>
-          </div>
-        </div>
-        <Menu
-          mode="inline"
-          defaultSelectedKeys={['1']}
-          defaultOpenKeys={['sub1']}
-          // style={{ height: '100%', borderRight: 0 }}
+    if (currentUser.subMenu) {
+      return (
+        <Sider
+          width={200}
+          style={{ background: '#fff' }}
+          visible={false}
+          collapsible
+          collapsed={this.state.subcollapsed}
+          trigger={null}
         >
-          <Menu.Item key="1">
-            <Icon type="mail" />
-            <span>概览</span>
-          </Menu.Item>
-          <Menu.Item key="2">
-            <a href="#/dashboard/workplace">
-              <Icon type="mail" />
-              <span>API说明</span>
-            </a>
-          </Menu.Item>
-          <Menu.Item key="3">
-            <Icon type="pie-chart" />
-            <span>服务状态</span>
-          </Menu.Item>
-          <Menu.Item key="4">
-            <Icon type="pie-chart" />
-            <span>服务管理</span>
-          </Menu.Item>
-          <Menu.Item key="4">
-            <Icon type="pie-chart" />
-            <span>服务日志</span>
-          </Menu.Item>
-        </Menu>
-      </Sider>
-    );
-    // }
+          <div style={{ position: 'relative', height: '22px' }}>
+            <Icon
+              style={{ float: 'right', 'font-size': '20px', padding: '4px 4px 4px 4px' }}
+              type={this.state.subcollapsed ? 'menu-unfold' : 'menu-fold'}
+              onClick={this.toggleCollapsed}
+            />
+          </div>
+          <Menu mode="inline" defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']}>
+            {currentUser.subMenu.summary && (
+              <Menu.Item key="1">
+                <a href={`#/service/${currentUser.serviceId}/summary`}>
+                  <Icon type="mail" />
+                  <span>概览</span>
+                </a>
+              </Menu.Item>
+            )}
+            {currentUser.subMenu.apidoc && (
+              <Menu.Item key="2">
+                <a href={`#/service/${currentUser.serviceId}/apidoc`}>
+                  <Icon type="mail" />
+                  <span>API说明</span>
+                </a>
+              </Menu.Item>
+            )}
+            {currentUser.subMenu.status && (
+              <Menu.Item key="3">
+                <a href={`#/service/${currentUser.serviceId}/status`}>
+                  <Icon type="pie-chart" />
+                  <span>服务状态</span>
+                </a>
+              </Menu.Item>
+            )}
+            {currentUser.subMenu.control && (
+              <Menu.Item key="4">
+                <a href={`#/service/${currentUser.serviceId}/control`}>
+                  <Icon type="pie-chart" />
+                  <span>服务管理</span>
+                </a>
+              </Menu.Item>
+            )}
+            {currentUser.subMenu.logs && (
+              <Menu.Item key="5">
+                <a href={`#/service/${currentUser.serviceId}/control`}>
+                  <Icon type="pie-chart" />
+                  <span>服务日志</span>
+                </a>
+              </Menu.Item>
+            )}
+          </Menu>
+        </Sider>
+      );
+    }
   }
 
   getBashRedirect = () => {
@@ -222,6 +233,14 @@ class BasicLayout extends React.PureComponent {
       });
     }
   };
+
+  handleClick = ({ item }) => {
+    const { currentUser } = this.props;
+
+    currentUser.serviceId = item.props.serviceId;
+    currentUser.subMenu = item.props.subMenu;
+  };
+
   handleNoticeVisibleChange = visible => {
     if (visible) {
       this.props.dispatch({
@@ -263,6 +282,7 @@ class BasicLayout extends React.PureComponent {
           location={location}
           isMobile={this.state.isMobile}
           onCollapse={this.handleMenuCollapse}
+          onClick={this.handleClick}
         />
         <Layout>
           <Header style={{ padding: 0 }}>

@@ -136,7 +136,11 @@ export default class SiderMenu extends PureComponent {
       }
       return null;
     } else {
-      return <Menu.Item key={item.path}>{this.getMenuItemPath(item)}</Menu.Item>;
+      return (
+        <Menu.Item key={item.path} subMenu={item.subMenu} serviceId={item.serviceId}>
+          {this.getMenuItemPath(item)}
+        </Menu.Item>
+      );
     }
   };
   /**
@@ -191,7 +195,7 @@ export default class SiderMenu extends PureComponent {
     });
   };
   render() {
-    const { logo, collapsed, onCollapse, menuData } = this.props;
+    const { logo, collapsed, onCollapse, menuData, onClick } = this.props;
     const { openKeys } = this.state;
     // Don't show popup menu when it is been collapsed
     const menuProps = collapsed
@@ -227,6 +231,7 @@ export default class SiderMenu extends PureComponent {
             mode="inline"
             {...menuProps}
             onOpenChange={this.handleOpenChange}
+            onClick={onClick}
             selectedKeys={selectedKeys}
             style={{ padding: '16px 0', width: '100%' }}
           >

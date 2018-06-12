@@ -72,7 +72,7 @@ export const getRouterData = app => {
     '/': {
       component: dynamicWrapper(app, ['user', 'login'], () => import('../layouts/BasicLayout')),
     },
-    '/dashboard/analysis': {
+    '/dashboard/overview': {
       component: dynamicWrapper(app, ['chart'], () => import('../routes/Dashboard/Analysis')),
     },
     '/dashboard/monitor': {
@@ -107,13 +107,13 @@ export const getRouterData = app => {
     '/form/advanced-form': {
       component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/AdvancedForm')),
     },
-    '/service/ngcpconfig': {
+    '/service/:serviceId/status': {
       component: dynamicWrapper(app, ['rule'], () => import('../routes/List/SimpleTableList')),
     },
     '/list/basic-list': {
       component: dynamicWrapper(app, ['list'], () => import('../routes/List/BasicList')),
     },
-    '/list/card-list': {
+    '/system/shop': {
       component: dynamicWrapper(app, ['list'], () => import('../routes/List/CardList')),
     },
     '/list/search': {
@@ -128,7 +128,7 @@ export const getRouterData = app => {
     '/list/search/articles': {
       component: dynamicWrapper(app, ['list'], () => import('../routes/List/Articles')),
     },
-    '/profile/basic': {
+    '/service/:serviceId/summary': {
       component: dynamicWrapper(app, ['profile'], () => import('../routes/Profile/BasicProfile')),
     },
     '/profile/advanced': {
