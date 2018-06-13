@@ -128,6 +128,9 @@ export const getRouterData = app => {
     '/list/search/articles': {
       component: dynamicWrapper(app, ['list'], () => import('../routes/List/Articles')),
     },
+    '/service/:serviceId/': {
+      component: dynamicWrapper(app, ['profile'], () => import('../routes/Profile/BasicProfile')),
+    },
     '/service/:serviceId/summary': {
       component: dynamicWrapper(app, ['profile'], () => import('../routes/Profile/BasicProfile')),
     },

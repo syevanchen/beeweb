@@ -44,7 +44,7 @@ function beehivaMenuAdapteConvert(data) {
 
     if (item.subMenu) {
       result.subMenu = item.subMenu;
-      result.path =  `${result.path}/summary`;
+      result.path =  `${result.path}`;
     }
     return result;
   });

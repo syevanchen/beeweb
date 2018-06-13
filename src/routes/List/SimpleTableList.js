@@ -409,7 +409,7 @@ export default class SimpleTableList extends PureComponent {
 
     let { list, pagination } = data;
     return (
-      <PageHeaderLayout title="查询表格">
+      <PageHeaderLayout title="服务状态">
         <Card bordered={false}>
           <div className={styles.tableList}>
             <Table
